@@ -1,5 +1,5 @@
 {
-  "name": "wcaptcha",
+  "name": "wcaptcha-js",
   "version": "1.0.0",
   "description": "wCaptcha javascript library",
   "main": "wcaptcha.js",
