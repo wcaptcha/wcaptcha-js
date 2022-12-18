@@ -132,7 +132,7 @@ wcaptcha.prototype.prove = function() {
                 let err = "Unable to verify, may be network issue"
                 if (that.elmInfo != undefined)  {
                     that.elmInfo.innerText = err
-                    that.elmInfo.style.color = "#f00"
+                    that.elm.style.background = "radial-gradient(#ff1e1e1f, #ff8f8f7d)"
                 }
                 rejector(`${err}: ${e1}`)
             })
