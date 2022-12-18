@@ -119,10 +119,26 @@ wcaptcha.prototype.prove = function() {
 
         that.setProgress(0)
         that.showUI()
-        that.getProblem().then( r => {
-            console.log(`Prepare to calculate ${r.x} ** (2 ** ${r.t}) mod ${r.n}`)
-            worker.postMessage(["eval", r.x, r.t, r.n])
-        })
+
+        try {
+            that.getProblem().then( r => {
+                if (!r) {
+                    rejector("Unable to get CAPTCHA question")
+                } else {
+                    console.log(`Prepare to calculate ${r.x} ** (2 ** ${r.t}) mod ${r.n}`)
+                    worker.postMessage(["eval", r.x, r.t, r.n])
+                }
+            }).catch(e1 => {
+                let err = "Unable to verify, may be network issue"
+                if (that.elmInfo != undefined)  {
+                    that.elmInfo.innerText = err
+                    that.elmInfo.style.color = "#f00"
+                }
+                rejector(`${err}: ${e1}`)
+            })
+        } catch (e2) {
+            rejector(e2)
+        }
     });
 }
 
@@ -152,8 +168,8 @@ wcaptcha.prototype.fetchProblem = async function() {
         let ret = await fetch(this.apiEndpoint + "captcha/problem/get?api_key=" + this.apiKey)
         j = await ret.json()
     } catch (e) {
-        console.warn("Unable to get wCaptcha question")
-        return
+        console.warn("Unable to get wCaptcha question", e)
+        throw e
     }
 
     if (j.code != 0 ){
