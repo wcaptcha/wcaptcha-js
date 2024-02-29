@@ -1,7 +1,7 @@
 'use strict'
 
-import vdfWorker from './vdfworker.js'
 import gmpWasm from './gmp.umd.js'
+import vdfWorker from './vdfworker.js'
 
 var wcaptcha = function (api_key) {
     this.apiKey = api_key
@@ -13,9 +13,8 @@ var wcaptcha = function (api_key) {
     // let workerUrl = URL.createObjectURL(new Blob([`(${vdfWorker.toString()})("${gmpUrl}")`]))
 
     let workerUrl = URL.createObjectURL(new Blob([`
-        ${gmpWasm.toString()}
-        gmpWasm();
-        (${vdfWorker.toString()})()
+        (${gmpWasm.toString()})();
+        (${vdfWorker.toString()})();
     `]))
 
     let worker = new Worker(workerUrl)

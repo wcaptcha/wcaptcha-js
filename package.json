@@ -1,6 +1,6 @@
 {
   "name": "wcaptcha-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "wCaptcha javascript library",
   "main": "wcaptcha.js",
   "scripts": {

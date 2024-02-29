@@ -4,7 +4,7 @@
  * @license LGPL-3.0
  */
 
-export default function gmpWasm() {
+function gmpWasm() {
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -3494,3 +3494,5 @@ export default function gmpWasm() {
 }));
 
 }
+
+export default gmpWasm
