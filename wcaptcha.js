@@ -6,8 +6,17 @@ import gmpWasm from './gmp.umd.js'
 var wcaptcha = function (api_key) {
     this.apiKey = api_key
 
-    let gmpUrl = URL.createObjectURL(new Blob([`(${gmpWasm.toString()})()`]))
-    let workerUrl = URL.createObjectURL(new Blob([`(${vdfWorker.toString()})("${gmpUrl}")`]))
+    // Firefox on Mac seems unable to load blob URL in a blob script. We merge two scripts into one.
+    // See https://github.com/wcaptcha/wcaptcha-js/issues/4
+    
+    // let gmpUrl = URL.createObjectURL(new Blob([`(${gmpWasm.toString()})()`]))
+    // let workerUrl = URL.createObjectURL(new Blob([`(${vdfWorker.toString()})("${gmpUrl}")`]))
+
+    let workerUrl = URL.createObjectURL(new Blob([`
+        ${gmpWasm.toString()}
+        gmpWasm();
+        (${vdfWorker.toString()})()
+    `]))
 
     let worker = new Worker(workerUrl)
     this.worker = worker;

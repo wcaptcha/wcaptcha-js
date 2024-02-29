@@ -1,6 +1,4 @@
-function vdfworker(_gmpUrl) {
-
-importScripts(_gmpUrl);
+function vdfworker() {
 
 console.debug("VDF worker started")
 
