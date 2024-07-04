@@ -1,8 +1,14 @@
 {
   "name": "wcaptcha-js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "wCaptcha javascript library",
   "main": "wcaptcha.js",
+  "files": [
+    "dist",
+    "gmp.umd.js",
+    "vdfworker.js",
+    "wcaptcha.js"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c rollup.config.js -w --bundleConfigAsCjs",
